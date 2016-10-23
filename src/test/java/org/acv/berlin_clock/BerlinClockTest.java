@@ -15,13 +15,13 @@ public class BerlinClockTest {
 	}
 
 	@Test
-	public void shouldRepresentOneMinuteUnits() {
+	public void shouldRepresentOneMinuteLights() {
 		String expectedBerlinClockTime = "Y\n" + "0000\n" + "0000\n" + "00000000000\n" + "YY00";
 		assertEquals(expectedBerlinClockTime, berlinClock.convertTime("00:02:00"));
 	}
 
 	@Test
-	public void shouldRepresentFiveMinuteUnits() {
+	public void shouldRepresentFiveMinuteLights() {
 		String expectedBerlinClockTime = "Y\n" + "0000\n" + "0000\n" + "YY000000000\n" + "0000";
 
 		assertEquals(expectedBerlinClockTime, berlinClock.convertTime("00:10:00"));
@@ -49,14 +49,14 @@ public class BerlinClockTest {
 	}
 
 	@Test
-	public void shouldRepresentOneHourUnits() {
+	public void shouldRepresentOneHourLights() {
 		String expectedBerlinClockTime = "Y\n" + "0000\n" + "R000\n" + "00000000000\n" + "0000";
 
 		assertEquals(expectedBerlinClockTime, berlinClock.convertTime("01:00:00"));
 	}
 
 	@Test
-	public void shouldRepresentFiveHourUnits() {
+	public void shouldRepresentFiveHourLights() {
 		String expectedBerlinClockTime = "Y\n" + "R000\n" + "0000\n" + "00000000000\n" + "0000";
 
 		assertEquals(expectedBerlinClockTime, berlinClock.convertTime("05:00:00"));
@@ -77,18 +77,33 @@ public class BerlinClockTest {
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void shouldThowExceptionWhenInvalidHourEntered() {
-		berlinClock.convertTime("24:00:00");
+	public void shouldThowExceptionWhenHoursGreaterThan23() {
+		berlinClock.convertTime("24:00:00");	
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void shouldThowExceptionWhenHoursLessThan0IsEntered() {
+		berlinClock.convertTime("-2:00:00");
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void shouldThowExceptionWhenInvalidMinutesEntered() {
+	public void shouldThowExceptionWhendMinutesGreaterThan59() {
 		berlinClock.convertTime("00:77:00");
 	}
-
+	
 	@Test(expected = IllegalArgumentException.class)
-	public void shouldThowExceptionWhenInvalidSecondsEntered() {
+	public void shouldThowExceptionWhendMinutesIsLessThan0() {
+		berlinClock.convertTime("00:-1:00");
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void shouldThowExceptionWhenSecondsGreaterThan59() {
 		berlinClock.convertTime("00:00:76");
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void shouldThowExceptionWhenSecondsLessThan0() {
+		berlinClock.convertTime("00:00:-01");
 	}
 
 	@Test(expected = IllegalArgumentException.class)
