@@ -11,7 +11,7 @@ Unlit lights with '0'
 ### How to run it:
 
   ./mvn exec:java -Dexec.args=23:20:10 or
-  ./target/java -jar berlin-clock-0.0.1-SNAPSHOT.jar 23:20:10
+  ./target/java -jar berlin-clock.jar 23:20:10
 
 
 
